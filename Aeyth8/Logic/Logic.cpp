@@ -93,6 +93,23 @@ void __fastcall EditorConstruct(SDK::UGymEditorControl* This)
 	GEditorControl = This;
 }
 
+typedef void(__fastcall* FEmptyDelegateWrapper_T)(__int64* RaceFinishedDelegate);
+static void __fastcall FEmptyDelegateWrapper(__int64* RaceFinishedDelegate)
+{
+	OFF::FEmptyDelegateWrapper.VerifyFC<FEmptyDelegateWrapper_T>()(RaceFinishedDelegate);
+
+	if (bLoadCustomMap)
+	{
+		bLoadCustomMap = false;
+
+		if (GEditorControl && GEditorControl->Map && (SDK::FMulticastInlineDelegateProperty_*)RaceFinishedDelegate == &GEditorControl->Map->OnMapLoaded)
+		{
+			LogA("MapLoader", GMapDirectory.ToString());
+			Call<ImportDBG_T>(OFF::DebugImport.PlusBase())(GEditorControl, &GMapDirectory);
+		}
+	}
+}
+
 typedef void(__fastcall* MapBP_T)(SDK::AGymMap* This);
 void __fastcall MapBP(SDK::AGymMap* This)
 {
@@ -186,7 +203,8 @@ static std::vector<Hooks::HookStructure> HookList =
 	{OFF::PreLogin, UFunctions::PreLogin},
 	{OFF::ConsoleCommand, UFunctions::ConsoleCommand},
 	{OFF::EditorConstructor, EditorConstruct},
-	{OFF::MapBP, MapBP},
+	//{OFF::MapBP, MapBP},
+	{OFF::FEmptyDelegateWrapper, FEmptyDelegateWrapper},
 };
 
 void Logic::Init_Hooks()

@@ -30,5 +30,6 @@ namespace OFF
 	extern OFFSET EditorConstructor;
 	extern OFFSET SetParentMap;
 	extern OFFSET MapBP;
+	extern OFFSET FEmptyDelegateWrapper;
 }
 }

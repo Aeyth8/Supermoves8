@@ -12,7 +12,7 @@ static void PreInit()
 	// Retrieves the Global Base Address (GBA) by getting the module handle casted as a uintptr_t
 	GBA = (uintptr_t)GetModuleHandleA("GYMGAME-Win64-Shipping.exe");
 
-	LogWin();
+	//LogWin();
 	LogA("GetCommandLineA", GetCommandLineA());
 	LogA("INITIALIZED", "The Global Base Address [GBA] is " + HexToString(GBA));
 

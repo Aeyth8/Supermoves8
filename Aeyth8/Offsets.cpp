@@ -30,5 +30,6 @@ namespace OFF
 	OFFSET EditorConstructor("UGymEditorControl::UGymEditorControl", 0x42D9F00);
 	OFFSET SetParentMap("AGymStaticLevelAsset::SetParentMap", 0x4337930);
 	OFFSET MapBP("AGymMap::BeginPlay", 0x43B9B30);
+	OFFSET FEmptyDelegateWrapper("FEmptyOnlineDelegate_DelegateWrapper", 0x28C93F0);
 }
 }
